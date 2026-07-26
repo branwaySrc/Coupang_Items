@@ -318,7 +318,7 @@ img {
 
 .footer-inner {
   align-items: center;
-  color: var(--muted);
+  color: #475569;
   display: flex;
   font-size: 14px;
   gap: 16px;
@@ -326,14 +326,14 @@ img {
 }
 
 .footer-inner strong {
-  color: var(--foreground);
+  color: #475569;
   display: block;
   font-size: 17px;
   margin-bottom: 4px;
 }
 
 .footer-inner a {
-  color: var(--primary-dark);
+  color: #475569;
   font-weight: 800;
 }
 
