@@ -73,7 +73,13 @@ test("layout and routes remain Vercel-compatible", async () => {
   assert.match(goods, /getProductsByCategory\("goods"\)/);
   assert.match(css, /max-width:\s*1280px/);
   assert.match(css, /justify-content:\s*space-between/);
+  assert.match(css, /font-family:\s*var\(--font-inter\)/);
+  assert.match(css, /\.hero h1\s*\{[\s\S]*font-weight:\s*700/);
+  assert.match(css, /\.section-header h2,[\s\S]*font-weight:\s*700/);
+  assert.match(css, /\.product-title\s*\{[\s\S]*font-weight:\s*700/);
+  assert.match(layout, /import \{ Inter \} from "next\/font\/google"/);
+  assert.match(layout, /variable:\s*"--font-inter"/);
   assert.match(layout, /김프로 \| 쿠팡 카페 아이템 추천/);
   assert.match(products, /DEFAULT_COUPANG_URL = "https:\/\/link\.coupang\.com\/a\/fH4sry2mJM"/);
-  assert.doesNotMatch(layout + products, /Cafe Shelf|Starter Project|codex-preview/);
+  assert.doesNotMatch(layout + products, /Cafe Shelf|Starter Project|codex-preview|Geist/);
 });
