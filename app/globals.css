@@ -212,6 +212,11 @@ img {
   width: 38px;
 }
 
+.back-arrow svg {
+  height: 20px;
+  width: 20px;
+}
+
 .section-kicker {
   color: var(--primary-dark);
   font-size: 13px;
@@ -311,14 +316,15 @@ img {
 }
 
 .site-footer {
-  border-top: 1px solid rgba(147, 197, 253, 0.62);
+  background: #0f172a;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
   margin-top: 56px;
   padding: 26px 0;
 }
 
 .footer-inner {
   align-items: center;
-  color: #475569;
+  color: #ffffff;
   display: flex;
   font-size: 14px;
   gap: 16px;
@@ -326,14 +332,14 @@ img {
 }
 
 .footer-inner strong {
-  color: #475569;
+  color: #ffffff;
   display: block;
   font-size: 17px;
   margin-bottom: 4px;
 }
 
 .footer-inner a {
-  color: #475569;
+  color: #ffffff;
   font-weight: 800;
 }
 

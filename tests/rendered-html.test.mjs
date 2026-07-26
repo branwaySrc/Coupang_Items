@@ -24,7 +24,8 @@ test("category pages have a top back header with the category title", async () =
 
   assert.match(catalog, /catalog-topbar/);
   assert.match(catalog, /back-arrow/);
-  assert.match(catalog, /←/);
+  assert.match(catalog, /from "lucide-react"/);
+  assert.match(catalog, /<ArrowLeft/);
   assert.match(catalog, /\{category\.title\}/);
   assert.doesNotMatch(catalog, /CoupangSearchHero|back-link/);
 });
@@ -43,6 +44,7 @@ test("home page includes footer and section more links", async () => {
     new URL("../components/coupang-search-hero.tsx", import.meta.url),
     "utf8",
   );
+  const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
 
   assert.match(page, /SiteFooter/);
   assert.match(section, /section-more/);
@@ -50,6 +52,8 @@ test("home page includes footer and section more links", async () => {
   assert.match(footer, /김프로/);
   assert.match(footer, /김민기/);
   assert.match(footer, /millimceo@gmail\.com/);
+  assert.match(css, /\.site-footer\s*\{[\s\S]*background:\s*#0f172a/);
+  assert.match(css, /\.footer-inner\s*\{[\s\S]*color:\s*#ffffff/);
   assert.match(hero, /target="_blank"/);
   assert.match(hero, /https:\/\/coupa\.ng\/cokQWt/);
 });

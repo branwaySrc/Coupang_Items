@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
 import { AffiliateBanner } from "@/components/affiliate-banner";
 import type { Category } from "@/data/categories";
 import type { ProductItem } from "@/data/products";
@@ -17,7 +18,7 @@ export function CategoryCatalog({ category, products }: CategoryCatalogProps) {
       <header className="catalog-topbar">
         <div className="page-container catalog-topbar-inner">
           <Link aria-label="메인으로 돌아가기" className="back-arrow" href="/">
-            ←
+            <ArrowLeft aria-hidden="true" size={20} strokeWidth={2.4} />
           </Link>
           <h1>{category.title}</h1>
         </div>
