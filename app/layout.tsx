@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { headers } from "next/headers";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -13,46 +12,37 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const siteTitle = "Cafe Shelf | 쿠팡 카페 아이템 큐레이션";
-const siteDescription =
-  "카페 소비재, 공간 정리, 운영 소모품을 카테고리별로 보여주는 쿠팡 아이템 큐레이션.";
-
-export async function generateMetadata(): Promise<Metadata> {
-  const requestHeaders = await headers();
-  const host = requestHeaders.get("x-forwarded-host") ?? requestHeaders.get("host");
-  const protocol = requestHeaders.get("x-forwarded-proto") ?? "https";
-  const baseUrl = new URL(`${protocol}://${host ?? "localhost:3000"}`);
-  const ogImage = new URL("/og.png", baseUrl).toString();
-
-  return {
-    metadataBase: baseUrl,
-    title: siteTitle,
-    description: siteDescription,
-    icons: {
-      icon: "/favicon.svg",
-      shortcut: "/favicon.svg",
-    },
-    openGraph: {
-      title: siteTitle,
-      description: siteDescription,
-      type: "website",
-      images: [
-        {
-          url: ogImage,
-          width: 1200,
-          height: 630,
-          alt: "Cafe Shelf 쿠팡 카페 아이템 큐레이션",
-        },
-      ],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: siteTitle,
-      description: siteDescription,
-      images: [ogImage],
-    },
-  };
-}
+export const metadata: Metadata = {
+  metadataBase: new URL("https://coupang-items.vercel.app"),
+  title: "김프로 | 쿠팡 카페 아이템 추천",
+  description:
+    "카페 재료, 카페 주방, 카페 잡화를 심플하게 모아보는 쿠팡 추천 아이템 큐레이션.",
+  icons: {
+    icon: "/favicon.svg",
+    shortcut: "/favicon.svg",
+  },
+  openGraph: {
+    title: "김프로 | 쿠팡 카페 아이템 추천",
+    description:
+      "카페 재료, 카페 주방, 카페 잡화를 심플하게 모아보는 쿠팡 추천 아이템 큐레이션.",
+    type: "website",
+    images: [
+      {
+        url: "/og.png",
+        width: 1200,
+        height: 630,
+        alt: "김프로 쿠팡 카페 아이템 추천",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "김프로 | 쿠팡 카페 아이템 추천",
+    description:
+      "카페 재료, 카페 주방, 카페 잡화를 심플하게 모아보는 쿠팡 추천 아이템 큐레이션.",
+    images: ["/og.png"],
+  },
+};
 
 export default function RootLayout({
   children,
@@ -60,12 +50,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
-      </body>
+    <html lang="ko" className={`${geistSans.variable} ${geistMono.variable}`}>
+      <body>{children}</body>
     </html>
   );
 }
