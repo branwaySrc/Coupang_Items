@@ -17,7 +17,7 @@ export const PRODUCTS: ProductItem[] = [
 		id: "watermelon",
 		category: "materials",
 		name: "소분하기 편한 연유",
-		description: "수박주스, 여름 컵과일, 빙수 토핑에 활용하기 좋은 시즌 재료.",
+		description: "작으니깐, 깨끗하게 관리할 수 있는 연유! 가격은 최고!",
 		image:
 			"https://thumbnail.coupangcdn.com/thumbnails/remote/492x492ex/image/retail/images/e37242d5-1720-4703-a864-e0266ff555c05163095470842979723.png",
 		link: "https://link.coupang.com/a/fH9XtIUrFQ",
@@ -27,7 +27,7 @@ export const PRODUCTS: ProductItem[] = [
 		id: "condensed-milk",
 		category: "materials",
 		name: "대용량 가성비 연유",
-		description: "돌체라떼, 빙수, 베트남 커피에 두루 쓰기 좋은 달콤한 베이스.",
+		description: "대용량, 최고의 가성비 연유! 매출 최적화에 탁월!",
 		image:
 			"https://thumbnail.coupangcdn.com/thumbnails/remote/492x492ex/image/vendor_inventory/image_audit/stage/manual/4d431fcf5515896f91efb0f6747dacfc3602af4bbdbbfaee599a8981c258_1761295431149.png",
 		link: "https://link.coupang.com/a/fH9YKcIjnM",
@@ -36,11 +36,11 @@ export const PRODUCTS: ProductItem[] = [
 	{
 		id: "matcha-powder",
 		category: "materials",
-		name: "말차 파우더",
-		description: "말차라떼, 크림 음료, 디저트 데코에 쓰기 좋은 파우더.",
+		name: "일정한 맛 보장! 수박",
+		description: "여름 최고의 베스트 셀러, 수박주스! 이걸로 만듭니다!",
 		image:
 			"https://thumbnail.coupangcdn.com/thumbnails/remote/492x492ex/image/retail/images/2652915367047300-d878e306-add0-44bc-bf12-f3354fc1a741.png",
-		link: DEFAULT_COUPANG_URL,
+		link: "https://link.coupang.com/a/fH94CAgWKy",
 		tag: "파우더",
 	},
 	{
