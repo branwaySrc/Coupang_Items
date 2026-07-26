@@ -15,7 +15,12 @@ export function CoupangSearchHero() {
                 <span className="brand-subtitle">쿠팡 카페 아이템 추천</span>
               </span>
             </a>
-            <a className="coupang-link" href={DEFAULT_COUPANG_URL}>
+            <a
+              className="coupang-link"
+              href={DEFAULT_COUPANG_URL}
+              rel="noopener noreferrer"
+              target="_blank"
+            >
               쿠팡 바로가기
             </a>
           </div>

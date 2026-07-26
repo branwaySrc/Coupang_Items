@@ -1,6 +1,7 @@
 import { AffiliateBanner } from "@/components/affiliate-banner";
 import { CoupangSearchHero } from "@/components/coupang-search-hero";
 import { ProductSection } from "@/components/product-section";
+import { SiteFooter } from "@/components/site-footer";
 import { CATEGORIES } from "@/data/categories";
 import { getProductsByCategory } from "@/data/products";
 
@@ -19,6 +20,7 @@ export default function Home() {
           />
         ))}
       </div>
+      <SiteFooter />
     </main>
   );
 }

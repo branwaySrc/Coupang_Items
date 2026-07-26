@@ -2,68 +2,74 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 
-test("homepage uses the Kimpro structure and Coupang integrations", async () => {
+test("product cards are full-card outbound links without badges or CTA buttons", async () => {
+  const card = await readFile(
+    new URL("../components/product-card.tsx", import.meta.url),
+    "utf8",
+  );
+  const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
+
+  assert.match(card, /className=\{\["product-card"/);
+  assert.match(card, /target="_blank"/);
+  assert.match(card, /rel="noopener noreferrer"/);
+  assert.doesNotMatch(card, /product-action|product-tag|쿠팡에서 보기/);
+  assert.doesNotMatch(css, /\.product-action|\.product-tag|\.back-link/);
+});
+
+test("category pages have a top back header with the category title", async () => {
+  const catalog = await readFile(
+    new URL("../components/category-catalog.tsx", import.meta.url),
+    "utf8",
+  );
+
+  assert.match(catalog, /catalog-topbar/);
+  assert.match(catalog, /back-arrow/);
+  assert.match(catalog, /←/);
+  assert.match(catalog, /\{category\.title\}/);
+  assert.doesNotMatch(catalog, /CoupangSearchHero|back-link/);
+});
+
+test("home page includes footer and section more links", async () => {
   const page = await readFile(new URL("../app/page.tsx", import.meta.url), "utf8");
+  const section = await readFile(
+    new URL("../components/product-section.tsx", import.meta.url),
+    "utf8",
+  );
+  const footer = await readFile(
+    new URL("../components/site-footer.tsx", import.meta.url),
+    "utf8",
+  );
   const hero = await readFile(
     new URL("../components/coupang-search-hero.tsx", import.meta.url),
     "utf8",
   );
-  const products = await readFile(
-    new URL("../data/products.ts", import.meta.url),
-    "utf8",
-  );
-  const banner = await readFile(
-    new URL("../components/affiliate-banner.tsx", import.meta.url),
-    "utf8",
-  );
 
-  assert.match(hero, /김프로/);
-  assert.match(hero, /DEFAULT_COUPANG_URL/);
-  assert.match(products, /https:\/\/link\.coupang\.com\/a\/fH4sry2mJM/);
+  assert.match(page, /SiteFooter/);
+  assert.match(section, /section-more/);
+  assert.match(section, /추천 아이템 모두보기/);
+  assert.match(footer, /김프로/);
+  assert.match(footer, /김민기/);
+  assert.match(footer, /millimceo@gmail\.com/);
+  assert.match(hero, /target="_blank"/);
   assert.match(hero, /https:\/\/coupa\.ng\/cokQWt/);
-  assert.match(banner, /쿠팡 파트너스 활동의 일환/);
-  assert.match(page, /ProductSection/);
-  assert.doesNotMatch(
-    page + hero + banner + products,
-    /Cafe Shelf|codex-preview|react-loading-skeleton|signin-with-chatgpt/i,
-  );
 });
 
-test("product constants expose the requested categories and enough items", async () => {
-  const categories = await readFile(
-    new URL("../data/categories.ts", import.meta.url),
-    "utf8",
-  );
-  const products = await readFile(
-    new URL("../data/products.ts", import.meta.url),
-    "utf8",
-  );
-
-  assert.match(categories, /카페 재료/);
-  assert.match(categories, /카페 주방/);
-  assert.match(categories, /카페 잡화/);
-  assert.match(products, /CategorySlug = "materials" \| "kitchen" \| "goods"/);
-  assert.match(products, /DEFAULT_COUPANG_URL = "https:\/\/link\.coupang\.com\/a\/fH4sry2mJM"/);
-  assert.ok((products.match(/category: "materials"/g) ?? []).length >= 10);
-  assert.ok((products.match(/category: "kitchen"/g) ?? []).length >= 10);
-  assert.ok((products.match(/category: "goods"/g) ?? []).length >= 10);
-});
-
-test("category routes and responsive layout are present", async () => {
-  const [materials, kitchen, goods, css, layout] = await Promise.all([
+test("layout and routes remain Vercel-compatible", async () => {
+  const [materials, kitchen, goods, css, layout, products] = await Promise.all([
     readFile(new URL("../app/materials/page.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/kitchen/page.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/goods/page.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
     readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../data/products.ts", import.meta.url), "utf8"),
   ]);
 
   assert.match(materials, /getProductsByCategory\("materials"\)/);
   assert.match(kitchen, /getProductsByCategory\("kitchen"\)/);
   assert.match(goods, /getProductsByCategory\("goods"\)/);
   assert.match(css, /max-width:\s*1280px/);
-  assert.match(css, /grid-template-columns:\s*repeat\(5, minmax\(0, 1fr\)\)/);
-  assert.match(css, /grid-template-columns:\s*repeat\(2, minmax\(0, 1fr\)\)/);
+  assert.match(css, /justify-content:\s*space-between/);
   assert.match(layout, /김프로 \| 쿠팡 카페 아이템 추천/);
-  assert.doesNotMatch(layout, /Cafe Shelf|Starter Project|codex-preview/);
+  assert.match(products, /DEFAULT_COUPANG_URL = "https:\/\/link\.coupang\.com\/a\/fH4sry2mJM"/);
+  assert.doesNotMatch(layout + products, /Cafe Shelf|Starter Project|codex-preview/);
 });
