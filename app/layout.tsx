@@ -13,9 +13,9 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const siteTitle = "Cafe Shelf | 쿠팡 카페 아이템 구매 가이드";
+const siteTitle = "Cafe Shelf | 쿠팡 카페 아이템 큐레이션";
 const siteDescription =
-  "홈카페와 소형 카페 운영자를 위한 심플한 카페 아이템 큐레이션 블로그.";
+  "카페 소비재, 공간 정리, 운영 소모품을 카테고리별로 보여주는 쿠팡 아이템 큐레이션.";
 
 export async function generateMetadata(): Promise<Metadata> {
   const requestHeaders = await headers();
@@ -41,7 +41,7 @@ export async function generateMetadata(): Promise<Metadata> {
           url: ogImage,
           width: 1200,
           height: 630,
-          alt: "Cafe Shelf 카페 아이템 구매 가이드",
+          alt: "Cafe Shelf 쿠팡 카페 아이템 큐레이션",
         },
       ],
     },

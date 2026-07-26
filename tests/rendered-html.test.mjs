@@ -23,18 +23,25 @@ async function render() {
   );
 }
 
-test("server-renders the cafe buying guide home page", async () => {
+test("server-renders the cafe commerce curation home page", async () => {
   const response = await render();
   assert.equal(response.status, 200);
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
 
   const html = await response.text();
   assert.match(html, /Cafe Shelf/);
-  assert.match(html, /쿠팡 카페 아이템 구매 가이드/);
-  assert.match(html, /핸드드립 기본 세트/);
-  assert.match(html, /쿠팡에서 비교하기/);
-  assert.match(html, /콜드브루 병입 루틴/);
-  assert.doesNotMatch(html, /codex-preview|react-loading-skeleton|SkeletonPreview/i);
+  assert.match(html, /쿠팡 카페 아이템 큐레이션/);
+  assert.match(html, /카페에서 쓰기 좋은 쿠팡 아이템을 한눈에/);
+  assert.match(html, /카페에서 사용하기 좋은 쿠팡 아이템/);
+  assert.match(html, /카페 공간을 위한 최적 쿠팡 아이템/);
+  assert.match(html, /수박/);
+  assert.match(html, /연유/);
+  assert.match(html, /서랍형 정리함/);
+  assert.match(html, /https:\/\/link\.coupang\.com\/a\/fHJNoeLjvU/);
+  assert.doesNotMatch(
+    html,
+    /codex-preview|react-loading-skeleton|SkeletonPreview|signin-with-chatgpt/i,
+  );
 });
 
 test("removes starter preview surface", async () => {
@@ -48,7 +55,7 @@ test("removes starter preview surface", async () => {
   assert.doesNotMatch(page, /_sites-preview|SkeletonPreview|codex-preview/);
   assert.doesNotMatch(layout, /Starter Project|codex-preview/);
   assert.doesNotMatch(packageJson, /react-loading-skeleton/);
-  assert.match(css, /hero-section/);
+  assert.match(css, /hero-store/);
   await assert.rejects(
     access(new URL("../app/_sites-preview/SkeletonPreview.tsx", import.meta.url)),
   );

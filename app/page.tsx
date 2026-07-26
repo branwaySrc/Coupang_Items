@@ -1,174 +1,228 @@
-const heroImage =
-  "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=1600&q=85";
+const COUPANG_LINK = "https://link.coupang.com/a/fHJNoeLjvU";
 
-const buyingGuides = [
+const heroProducts = [
   {
-    category: "홈카페 스타터",
-    title: "처음 사도 오래 쓰는 핸드드립 기본 세트",
-    summary:
-      "드리퍼, 서버, 필터, 저울까지 과하지 않은 구성으로 시작하는 데일리 브루잉 가이드.",
+    name: "수박",
+    label: "여름 음료 베이스",
     image:
-      "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=900&q=80",
-    search: "핸드드립 세트",
-    meta: "5분 읽기",
+      "https://images.unsplash.com/photo-1587049352851-8d4e89133924?auto=format&fit=crop&w=700&q=80",
   },
   {
-    category: "정리 아이템",
-    title: "작은 주방을 카페 바처럼 정돈하는 수납 리스트",
-    summary:
-      "컵 홀더, 시럽 펌프, 원두 보관 용기처럼 동선과 분위기를 함께 바꾸는 제품만 모았습니다.",
+    name: "연유",
+    label: "라떼와 빙수 토핑",
     image:
-      "https://images.unsplash.com/photo-1521017432531-fbd92d768814?auto=format&fit=crop&w=900&q=80",
-    search: "카페 수납 정리",
-    meta: "7분 읽기",
+      "https://images.unsplash.com/photo-1563636619-e9143da7973b?auto=format&fit=crop&w=700&q=80",
   },
   {
-    category: "콜드브루",
-    title: "여름 매출을 만드는 콜드브루 병입 루틴",
-    summary:
-      "추출 용기, 유리병, 라벨링 소품까지 홈카페와 소형 매장 모두에 맞는 체크리스트.",
+    name: "서랍형 정리함",
+    label: "카운터 수납",
     image:
-      "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=900&q=80",
-    search: "콜드브루 메이커",
-    meta: "6분 읽기",
+      "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=700&q=80",
   },
 ];
 
-const essentials = [
-  "전동 그라인더",
-  "스테인리스 탬퍼",
-  "원두 밀폐 용기",
-  "컵 디스펜서",
-  "시럽 펌프",
-  "드립포트",
+const categories = [
+  {
+    id: "consumables",
+    eyebrow: "Consumables",
+    title: "카페에서 사용하기 좋은 쿠팡 아이템",
+    description:
+      "음료 제조, 토핑, 시즌 메뉴에 바로 활용하기 좋은 소비재 중심으로 묶었습니다.",
+    products: [
+      {
+        name: "수박",
+        use: "수박주스, 시즌 컵과일, 빙수 토핑",
+        tag: "시즌 메뉴",
+        image:
+          "https://images.unsplash.com/photo-1587049352851-8d4e89133924?auto=format&fit=crop&w=900&q=80",
+      },
+      {
+        name: "연유",
+        use: "돌체라떼, 베트남 커피, 빙수 베이스",
+        tag: "음료 베이스",
+        image:
+          "https://images.unsplash.com/photo-1563636619-e9143da7973b?auto=format&fit=crop&w=900&q=80",
+      },
+      {
+        name: "말차 파우더",
+        use: "말차라떼, 크림 라떼, 디저트 데코",
+        tag: "파우더",
+        image:
+          "https://images.unsplash.com/photo-1564890369478-c89ca6d9cde9?auto=format&fit=crop&w=900&q=80",
+      },
+      {
+        name: "바닐라 시럽",
+        use: "아이스라떼, 플랫화이트, 시그니처 메뉴",
+        tag: "시럽",
+        image:
+          "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=900&q=80",
+      },
+    ],
+  },
+  {
+    id: "space",
+    eyebrow: "Cafe space",
+    title: "카페 공간을 위한 최적 쿠팡 아이템",
+    description:
+      "카운터, 바 테이블, 재고 선반처럼 매일 보는 공간을 정돈하는 아이템입니다.",
+    products: [
+      {
+        name: "서랍형 정리함",
+        use: "빨대, 냅킨, 영수증, 소형 비품 분류",
+        tag: "수납",
+        image:
+          "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=900&q=80",
+      },
+      {
+        name: "원두 밀폐 용기",
+        use: "원두 향 보존, 로스팅 날짜별 관리",
+        tag: "보관",
+        image:
+          "https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=900&q=80",
+      },
+      {
+        name: "컵 디스펜서",
+        use: "테이크아웃 컵 동선 정리",
+        tag: "카운터",
+        image:
+          "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=900&q=80",
+      },
+      {
+        name: "트레이",
+        use: "픽업존, 디저트 진열, 테이블 세팅",
+        tag: "진열",
+        image:
+          "https://images.unsplash.com/photo-1521017432531-fbd92d768814?auto=format&fit=crop&w=900&q=80",
+      },
+    ],
+  },
+  {
+    id: "operations",
+    eyebrow: "Operations",
+    title: "매장 운영에 필요한 소모품",
+    description:
+      "재고가 떨어지면 바로 불편해지는 필수 소모품을 운영 관점으로 정리했습니다.",
+    products: [
+      {
+        name: "테이크아웃 컵",
+        use: "아이스 음료, 시즌 컵, 배달 포장",
+        tag: "포장",
+        image:
+          "https://images.unsplash.com/photo-1577937927133-66ef06acdf18?auto=format&fit=crop&w=900&q=80",
+      },
+      {
+        name: "컵 캐리어",
+        use: "단체 주문, 배달, 픽업 안정성",
+        tag: "배달",
+        image:
+          "https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?auto=format&fit=crop&w=900&q=80",
+      },
+      {
+        name: "냅킨",
+        use: "셀프바, 테이블, 포장 세트",
+        tag: "셀프바",
+        image:
+          "https://images.unsplash.com/photo-1523362628745-0c100150b504?auto=format&fit=crop&w=900&q=80",
+      },
+      {
+        name: "위생장갑",
+        use: "디저트 포장, 과일 손질, 마감 청소",
+        tag: "위생",
+        image:
+          "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=900&q=80",
+      },
+    ],
+  },
 ];
 
-const notes = [
-  {
-    title: "구매 전 체크",
-    body: "용량, 세척 난이도, 보관 공간을 먼저 보고 브랜드는 그 다음에 비교합니다.",
-  },
-  {
-    title: "콘텐츠 톤",
-    body: "제품 나열보다 실제 사용 장면, 설치 전후, 맛의 변화처럼 결정에 도움이 되는 글을 우선합니다.",
-  },
-  {
-    title: "쿠팡 연결",
-    body: "각 글의 구매 버튼은 상품명 중심의 쿠팡 검색으로 이어지도록 구성했습니다.",
-  },
-];
+const quickFilters = ["소비재", "공간 정리", "운영 소모품", "시즌 메뉴"];
 
 export default function Home() {
   return (
-    <main className="site-shell">
-      <header className="topbar" aria-label="Cafe Shelf navigation">
+    <main className="commerce-shell">
+      <header className="store-header" aria-label="Cafe Shelf navigation">
         <a className="brand" href="#">
           <span className="brand-mark">CS</span>
           <span>Cafe Shelf</span>
         </a>
         <nav className="nav-links" aria-label="Main menu">
-          <a href="#guides">가이드</a>
-          <a href="#essentials">아이템</a>
-          <a href="#journal">저널</a>
+          <a href="#consumables">소비재</a>
+          <a href="#space">공간</a>
+          <a href="#operations">운영</a>
         </nav>
-        <a
-          className="nav-action"
-          href="https://www.coupang.com/np/search?q=%EC%B9%B4%ED%8E%98%EC%9A%A9%ED%92%88"
-        >
-          쿠팡에서 찾기
+        <a className="header-button" href={COUPANG_LINK}>
+          쿠팡 링크
         </a>
       </header>
 
-      <section className="hero-section">
+      <section className="hero-store">
         <div className="hero-copy">
-          <p className="eyebrow">Cafe goods buying journal</p>
-          <h1>집에서도, 작은 매장에서도 카페답게 고르는 법</h1>
-          <p className="hero-text">
-            Cafe Shelf는 카페 관련 아이템을 과하게 소개하지 않고, 실제로
-            쓰임이 좋은 제품군과 구매 기준을 정리하는 심플한 블로그입니다.
-          </p>
-          <div className="hero-actions">
-            <a className="primary-button" href="#guides">
-              추천 글 보기
-            </a>
-            <a
-              className="secondary-button"
-              href="https://www.coupang.com/np/search?q=%ED%99%88%EC%B9%B4%ED%8E%98"
-            >
-              홈카페 검색
-            </a>
-          </div>
-        </div>
-        <div className="hero-media">
-          <img src={heroImage} alt="커피 추출 도구가 놓인 카페 테이블" />
-          <div className="hero-panel">
-            <span>이번 주 큐레이션</span>
-            <strong>핸드드립, 보관, 콜드브루</strong>
-          </div>
-        </div>
-      </section>
-
-      <section id="guides" className="section-block">
-        <div className="section-heading">
-          <p className="eyebrow">Buying guides</p>
-          <h2>카페 아이템 구매 가이드</h2>
-        </div>
-        <div className="guide-grid">
-          {buyingGuides.map((guide) => (
-            <article className="guide-card" key={guide.title}>
-              <img src={guide.image} alt="" />
-              <div className="guide-content">
-                <div className="card-meta">
-                  <span>{guide.category}</span>
-                  <span>{guide.meta}</span>
-                </div>
-                <h3>{guide.title}</h3>
-                <p>{guide.summary}</p>
-                <a
-                  href={`https://www.coupang.com/np/search?q=${encodeURIComponent(
-                    guide.search,
-                  )}`}
-                >
-                  쿠팡에서 비교하기
-                </a>
-              </div>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section id="essentials" className="essentials-section">
-        <div>
-          <p className="eyebrow">Essentials</p>
-          <h2>글감이 되는 카페 필수 아이템</h2>
+          <p className="eyebrow">Cafe commerce curation</p>
+          <h1>카페에서 쓰기 좋은 쿠팡 아이템을 한눈에</h1>
           <p>
-            블로그 운영 초반에는 검색 의도가 분명한 아이템부터 다루면 좋습니다.
-            제품명보다 문제 해결 중심으로 제목을 잡아 구매 전환까지 자연스럽게
-            이어지도록 구성했습니다.
+            소비재부터 공간 정리, 운영 소모품까지 카페 운영자가 자주 찾는
+            아이템을 카테고리별로 빠르게 둘러볼 수 있게 구성했습니다.
           </p>
+          <div className="filter-row" aria-label="추천 카테고리">
+            {quickFilters.map((filter) => (
+              <a key={filter} href={COUPANG_LINK}>
+                {filter}
+              </a>
+            ))}
+          </div>
         </div>
-        <div className="tag-grid" aria-label="추천 아이템 키워드">
-          {essentials.map((item) => (
-            <a
-              key={item}
-              href={`https://www.coupang.com/np/search?q=${encodeURIComponent(
-                item,
-              )}`}
-            >
-              {item}
+        <div className="hero-product-grid" aria-label="대표 추천 아이템">
+          {heroProducts.map((product) => (
+            <a className="hero-product" href={COUPANG_LINK} key={product.name}>
+              <img src={product.image} alt="" />
+              <span>{product.label}</span>
+              <strong>{product.name}</strong>
             </a>
           ))}
         </div>
       </section>
 
-      <section id="journal" className="journal-section">
-        {notes.map((note) => (
-          <article key={note.title}>
-            <span>{note.title}</span>
-            <p>{note.body}</p>
-          </article>
-        ))}
+      <section className="featured-strip" aria-label="빠른 구매 포인트">
+        <div>
+          <span>Today pick</span>
+          <strong>수박, 연유, 서랍형 정리함</strong>
+        </div>
+        <div>
+          <span>Best use</span>
+          <strong>시즌 메뉴와 카운터 정돈</strong>
+        </div>
+        <a href={COUPANG_LINK}>쿠팡에서 전체 보기</a>
       </section>
+
+      {categories.map((category) => (
+        <section className="category-section" id={category.id} key={category.id}>
+          <div className="section-heading">
+            <div>
+              <p className="eyebrow">{category.eyebrow}</p>
+              <h2>{category.title}</h2>
+            </div>
+            <p>{category.description}</p>
+          </div>
+          <div className="product-grid">
+            {category.products.map((product) => (
+              <article className="product-card" key={product.name}>
+                <a className="product-image" href={COUPANG_LINK}>
+                  <img src={product.image} alt="" />
+                  <span>{product.tag}</span>
+                </a>
+                <div className="product-info">
+                  <h3>{product.name}</h3>
+                  <p>{product.use}</p>
+                  <div className="product-actions">
+                    <a href={COUPANG_LINK}>쿠팡에서 보기</a>
+                    <span>추천 아이템</span>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+      ))}
     </main>
   );
 }
