@@ -6,21 +6,17 @@ import { CATEGORIES } from "@/data/categories";
 import { getProductsByCategory } from "@/data/products";
 
 export default function Home() {
-  return (
-    <main className="site-shell">
-      <AffiliateBanner />
-      <CoupangSearchHero />
+	return (
+		<main className="site-shell">
+			<AffiliateBanner />
+			<CoupangSearchHero />
 
-      <div className="page-container section-stack">
-        {CATEGORIES.map((category) => (
-          <ProductSection
-            category={category}
-            key={category.slug}
-            products={getProductsByCategory(category.slug)}
-          />
-        ))}
-      </div>
-      <SiteFooter />
-    </main>
-  );
+			<div className="page-container section-stack">
+				{CATEGORIES.map(category => (
+					<ProductSection category={category} key={category.slug} products={getProductsByCategory(category.slug)} />
+				))}
+			</div>
+			<SiteFooter />
+		</main>
+	);
 }
