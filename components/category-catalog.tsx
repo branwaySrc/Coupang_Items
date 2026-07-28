@@ -1,8 +1,9 @@
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { AffiliateBanner } from "@/components/affiliate-banner";
+import { ProductSearch } from "@/components/product-search";
 import type { Category } from "@/data/categories";
-import type { ProductItem } from "@/data/products";
+import { PRODUCTS, type ProductItem } from "@/data/products";
 import { ProductCard } from "./product-card";
 import { SiteFooter } from "./site-footer";
 
@@ -15,6 +16,7 @@ export function CategoryCatalog({ category, products }: CategoryCatalogProps) {
   return (
     <main className="site-shell">
       <AffiliateBanner />
+      <ProductSearch products={PRODUCTS} />
       <header className="catalog-topbar">
         <div className="page-container catalog-topbar-inner">
           <Link aria-label="메인으로 돌아가기" className="back-arrow" href="/">
